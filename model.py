@@ -185,35 +185,68 @@ class Board(GameElement):
         self[old_pos].move_to(new_pos)
         self[new_pos] = self[old_pos]
         self[old_pos] = None
-        
-    def left(self):
-        slideVec = Vec(0, -1)
-        for row in range(self.rows):
+
+    def _move(self, startPos, slideVec, rowDir, colDir):
+       # startPos: which tile to move first
+       # slideVec: what vector to add to each tile (how it moves)
+       # rowDir: up or down? (-1 is up, 1 is down)
+       # colDir: left or right? (-1 is left, 1 is right)
+       
+       # maybe use a while loop and repeatedly add direction to counter? for loops get tricky with reversing
+       # and have too many ifs
+       for row in range(self.rows):
             for col in range(self.cols):
                 pos = Vec(row, col)
                 self.slide(pos, slideVec)
+
+
+    def left(self):
+        slideVec = Vec(0, -1)
+        # for row in range(self.rows):
+        #     for col in range(self.cols):
+        #         pos = Vec(row, col)
+        #         self.slide(pos, slideVec)
+        startPos = Vec(0,0)
+        rowDir = 0
+        colDir = 0
+        self._move(startPos, slideVec, rowDir, colDir)
     
     def right(self):
         slideVec = Vec(0, 1)
-        for row in reversed(range(self.rows)):
-            for col in reversed(range(self.cols)):
-                pos = Vec(row, col)
-                self.slide(pos, slideVec)
-    
+        # for row in reversed(range(self.rows)):
+        #     for col in reversed(range(self.cols)):
+        #         pos = Vec(row, col)
+        #         self.slide(pos, slideVec)
+        startPos = Vec(0,0)
+        rowDir = 0
+        colDir = 0
+        self._move(startPos, slideVec, rowDir, colDir)
+
     def up(self):
         slideVec = Vec(-1, 0)
-        for row in range(self.rows):
-            for col in range(self.cols):
-                pos = Vec(row, col)
-                self.slide(pos, slideVec)
-    
+        # for row in range(self.rows):
+        #     for col in range(self.cols):
+        #         pos = Vec(row, col)
+        #         self.slide(pos, slideVec)
+        startPos = Vec(0,0)
+        rowDir = 0
+        colDir = 0
+        self._move(startPos, slideVec, rowDir, colDir)
+
     def down(self):
         slideVec = Vec(1, 0)
-        for row in range(self.rows):
-            for col in reversed(range(self.cols)):
-                pos = Vec(row, col)
-                self.slide(pos, slideVec)
-    
+        # for row in range(self.rows):
+        #     for col in reversed(range(self.cols)):
+        #         pos = Vec(row, col)
+        #         self.slide(pos, slideVec)
+        # maybe self.rows - 1?
+        startPos = Vec(0,self.rows)
+        rowDir = 0
+        colDir = 0
+        self._move(startPos, slideVec, rowDir, colDir)
+
+
+
     def score(self) -> int:
         """Calculate a score from the board.
         (Differs from classic 1024, which calculates score
