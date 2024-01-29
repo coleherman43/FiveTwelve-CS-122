@@ -187,18 +187,28 @@ class Board(GameElement):
         self[old_pos] = None
 
     def _move(self, startPos, slideVec, rowDir, colDir):
-       # startPos: which tile to move first
+       # startPos: which tile to move first MAYBE NOT NEEDED
        # slideVec: what vector to add to each tile (how it moves)
-       # rowDir: up or down? (-1 is up, 1 is down)
-       # colDir: left or right? (-1 is left, 1 is right)
+       # rowDir: up or down? (1 is up, -1 is down) since changes from least to most affected
+       # colDir: left or right? (1 is left, -1 is right) see above why
        
        # maybe use a while loop and repeatedly add direction to counter? for loops get tricky with reversing
        # and have too many ifs
-       for row in range(self.rows):
-            for col in range(self.cols):
-                pos = Vec(row, col)
-                self.slide(pos, slideVec)
-
+    #    for row in range(self.rows):
+    #         for col in range(self.cols):
+    #             pos = Vec(row, col)
+    #             self.slide(pos, slideVec)
+        # add while loop below
+        row = startPos(0)
+        while row >= 0 and row < self.rows:
+           # test here
+           # add to columns first if going up or down. Add to rows first if going left or right
+           
+           # do code
+           
+           # how to loop
+           
+               
 
     def left(self):
         slideVec = Vec(0, -1)
@@ -208,7 +218,7 @@ class Board(GameElement):
         #         self.slide(pos, slideVec)
         startPos = Vec(0,0)
         rowDir = 0
-        colDir = 0
+        colDir = 1
         self._move(startPos, slideVec, rowDir, colDir)
     
     def right(self):
@@ -219,7 +229,7 @@ class Board(GameElement):
         #         self.slide(pos, slideVec)
         startPos = Vec(0,0)
         rowDir = 0
-        colDir = 0
+        colDir = -1
         self._move(startPos, slideVec, rowDir, colDir)
 
     def up(self):
@@ -230,7 +240,7 @@ class Board(GameElement):
         #         self.slide(pos, slideVec)
         startPos = Vec(0,0)
         rowDir = 0
-        colDir = 0
+        colDir = 1
         self._move(startPos, slideVec, rowDir, colDir)
 
     def down(self):
@@ -242,7 +252,7 @@ class Board(GameElement):
         # maybe self.rows - 1?
         startPos = Vec(0,self.rows)
         rowDir = 0
-        colDir = 0
+        colDir = 1
         self._move(startPos, slideVec, rowDir, colDir)
 
 
